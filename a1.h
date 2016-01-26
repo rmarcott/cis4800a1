@@ -1,0 +1,24 @@
+typedef struct{
+    int shape;
+    int colour;
+    int iterations;
+    float size;
+    float inx;
+    float xoff;
+    float iny;
+    float yoff;
+    float inz;
+    float zoff;
+    float inxr;
+    float xroff;
+    float inyr;
+    float yroff;
+    float inzr;
+    float zroff;
+    float inxs;
+    float xsoff;
+    float inys;
+    float ysoff;
+    float inzs;
+    float zsoff;
+}shapes;

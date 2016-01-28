@@ -67,17 +67,75 @@ GLfloat red[]   = {1.0, 0.0, 0.0, 1.0};
 GLfloat green[] = {0.0, 1.0, 0.0, 1.0};
 GLfloat white[] = {1.0, 1.0, 1.0, 1.0};
 
+    
+    
+    int i=0;
+    
+    for (i=0;i<numberLevels;i++){
+        if (shapesArray[i].colour==0){
+            glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, blue);
+        }
+        else if(shapesArray[i].colour==1){
+            glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, red);
+        }
+        else if(shapesArray[i].colour==2){
+            glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, green);
+        }
+        else if(shapesArray[i].colour==3){
+            glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, white);
+        }
+        else{
+            printf("Error:invlaid colour");
+            exit(0);
+        }
+        glMaterialfv(GL_FRONT, GL_SPECULAR, white);
+        
+        glPushMatrix ();
+        
+        glTranslatef (shapesArray[i].inx, shapesArray[i].iny, shapesArray[i].inz);
+        glRotatef(145,shapesArray[i].inxr,shapesArray[i].inyr,shapesArray[i].inzr);
+        glScalef(shapesArray[i].inxs,shapesArray[i].inys,shapesArray[i].inzs);
+        //glTranslatef (0.75, 0.0, -1.0);
+        
+        //determine shape
+        if(shapesArray[i].shape==0){
+            glutSolidSphere (1.0, 15, 15);
+            
+        }
+        else if(shapesArray[i].shape==1){
+            glutSolidCube(shapesArray[i].size);
+        }
+        else if(shapesArray[i].shape==2){
+            glutSolidTorus(10,15,15,15);
+        }
+        else if(shapesArray[i].shape==3){
+            glutSolidCone(5,15,10,10);
+        }
+        else{
+            printf("Error:invalid shape");
+        }
+        
+        //glutSolidSphere (1.0, 15, 15);
+        glPopMatrix ();
+        
+        
+    }
+    
+    
+    
+    
+    
 	/* example of drawing an object */
 	/* remove the code after this line and replace it with assignment code */
 	/* set colour of sphere */
-   glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, green);
-   glMaterialfv(GL_FRONT, GL_SPECULAR, white);
+   //glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, blue);
+   //glMaterialfv(GL_FRONT, GL_SPECULAR, white);
 	/* move to location for object then draw it */
-   glPushMatrix ();
-   glTranslatef (0.75, 0.0, -1.0); 
+   //glPushMatrix ();
+   //glTranslatef (0.75, 0.0, -1.0);
 
-   glutSolidSphere (1.0, 15, 15);
-   glPopMatrix ();
+   //glutSolidSphere (1.0, 15, 15);
+   //glPopMatrix ();
 
 }
 
@@ -101,6 +159,18 @@ void display (void) {
 	/* give all objects the same shininess value */
    glMaterialf(GL_FRONT, GL_SHININESS, 30.0);
 
+    
+    
+    /*Have for loop here that loops each shape, sets starting locations then calls draw objects*/
+    
+    //int i=0;
+    
+   // for (i=0;i<numberLevels;i++){
+        
+   // }
+    
+    
+    
 	/* set starting location of objects */
    glPushMatrix ();
    glRotatef(180.0, 1.0, 0.0, 0.0);
@@ -246,7 +316,7 @@ int main(int argc, char** argv)
 {
 
    readFile(argv);
-    printf("%d %d %d %f %f \n",shapesArray[1].shape, shapesArray[1].colour, shapesArray[1].iterations, shapesArray[1].size, shapesArray[1].inx);
+    //printf("%d %d %d %f %f \n",shapesArray[0].shape, shapesArray[0].colour, shapesArray[0].iterations, shapesArray[0].size, shapesArray[0].inx);
 
    glutInit(&argc, argv);
    glutInitDisplayMode (GLUT_SINGLE | GLUT_RGBA | GLUT_DEPTH);

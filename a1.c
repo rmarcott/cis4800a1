@@ -93,23 +93,30 @@ GLfloat white[] = {1.0, 1.0, 1.0, 1.0};
         glPushMatrix ();
         
         glTranslatef (shapesArray[i].inx, shapesArray[i].iny, shapesArray[i].inz);
-        glRotatef(145,shapesArray[i].inxr,shapesArray[i].inyr,shapesArray[i].inzr);
+
+        /*rotate angle by x axis, then y axis then z axis*/
+	//glRotatef(145,shapesArray[i].inxr,shapesArray[i].inyr,shapesArray[i].inzr);
+	glRotatef(shapesArray[i].inxr,1,0,0);
+	glRotatef(shapesArray[i].inyr,0,1,0);
+	glRotatef(shapesArray[i].inzr,0,0,1);
+
+
         glScalef(shapesArray[i].inxs,shapesArray[i].inys,shapesArray[i].inzs);
         //glTranslatef (0.75, 0.0, -1.0);
         
         //determine shape
         if(shapesArray[i].shape==0){
-            glutSolidSphere (1.0, 15, 15);
+            glutSolidSphere (shapesArray[i].size);
             
         }
         else if(shapesArray[i].shape==1){
             glutSolidCube(shapesArray[i].size);
         }
         else if(shapesArray[i].shape==2){
-            glutSolidTorus(10,15,15,15);
+            glutSolidTorus(shapesArray[i].size,(shapesArray[i].size/2));
         }
         else if(shapesArray[i].shape==3){
-            glutSolidCone(5,15,10,10);
+            glutSolidCone(shapesArray[i].size,shapesArray[i].size);
         }
         else{
             printf("Error:invalid shape");
